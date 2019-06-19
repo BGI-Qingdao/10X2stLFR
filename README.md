@@ -27,15 +27,11 @@ This project is still within developing.
 
 ### step 2 , covert reads head line from 10X format into stLFR reads format
 
-* for read1 , do : 
+* command example : 
 ```
-awk '{if(NF==1){printf("%s\n",$1);}else{printf("%s#%s/1\n",$1,$2);} }' <test_S1_L001_R1.fastq >stlfr_read2.fastq
+gzip -dc barcoded.fastq.gz | awk 'BEGIN{id=2;}{if(NF==1){printf("%s\n",$1);}else{if(id==1){id=2;}else{id=1;};printf("%s#%s/%d\n",$1,$2,id);} }' >stlfr_read12.fastq
 ```
 
-* for read2 , do :
-```
-awk '{if(NF==1){printf("%s\n",$1);}else{printf("%s#%s/2\n",$1,$2);} }' <test_S1_L001_R2.fastq >stlfr_read2.fastq
-```
 
 ## data example
 
