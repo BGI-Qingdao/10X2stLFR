@@ -24,6 +24,11 @@ This project is still within developing.
 ```
     YOUR-LONGRANGER-PATH/longranger basic --id=YOUR-iD --fastqs=YOUR-RAW-READS-PATH
 ```
+* where is the output file
+
+```
+YOUR-RUN-PATH/YOUR-ID/outs/barcoded.fastq.gz
+```
 
 ### step 2 , covert reads head line from 10X format into stLFR reads format
 
@@ -31,7 +36,6 @@ This project is still within developing.
 ```
 gzip -dc barcoded.fastq.gz | awk 'BEGIN{id=2;}{if(NF==1){printf("%s\n",$1)>>"stlfr_read."id".fastq"}else if( NF >1 ) {if(id==1){id=2;}else{id=1;};printf("%s#%s/%d\n",$1,$2,id) >> "stlfr_read."id".fastq"} }'
 ```
-
 
 ## data example
 
