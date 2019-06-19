@@ -12,7 +12,7 @@ This project is still within developing.
 
     it takes FASTQ files from longranger mkfastq and performs basic barcode processing including error correction, barcode white-listing, and attaching barcodes to reads.
 
-* office document url of longranger.
+* Official document url of longranger.
 
     https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger
 
