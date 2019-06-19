@@ -29,7 +29,7 @@ This project is still within developing.
 
 * command example : 
 ```
-gzip -dc barcoded.fastq.gz | awk 'BEGIN{id=2;}{if(NF==1){printf("%s\n",$1);}else{if(id==1){id=2;}else{id=1;};printf("%s#%s/%d\n",$1,$2,id);} }' >stlfr_read12.fastq
+gzip -dc barcoded.fastq.gz | awk 'BEGIN{id=2;}{if(NF==1){printf("%s\n",$1)>>"stlfr_read."id".fastq"}else if( NF >1 ) {if(id==1){id=2;}else{id=1;};printf("%s#%s/%d\n",$1,$2,id) >> "stlfr_read."id".fastq"} }'
 ```
 
 
