@@ -34,7 +34,7 @@ YOUR-RUN-PATH/YOUR-ID/outs/barcoded.fastq.gz
 
 * command example : 
 ```
-gzip -dc barcoded.fastq.gz | awk 'BEGIN{id=2;}{if(NF==1){printf("%s\n",$1)>>"stlfr_read."id".fastq"}else if( NF >1 ) {if(id==1){id=2;}else{id=1;};printf("%s#%s/%d\n",$1,$2,id) >> "stlfr_read."id".fastq"} }'
+gzip -dc barcoded.fastq.gz | awk  'BEGIN{id=2;}{if((NR)%4==1) {if(id==1){id=2;}else{id=1;};if(NF>1){bc=$2;}else{bc="0_0_0";} printf("%s#%s/%d\n",$1,bc,id) >> "stlfr_read."id".fastq"} else {printf("%s\n",$1)>>"stlfr_read."id".fastq"}  }'
 ```
 
 ## data example
