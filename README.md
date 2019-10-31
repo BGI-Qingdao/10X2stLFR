@@ -64,3 +64,19 @@ CACACACACACCACACACACTATACATATACATACATAATAAACACATTATATATACACACCACATACACCATACATACA
 +
 KKKKKKKKKKKKKKKKKKKK7FFKKKKKKKKK<FFKFKKKK,A,AK7A,7,KAFFKKKKKKKKKKFFKK,<FFFKK<F<AFKKKFKKKFFFK77,,7FKAKAKFKFKK,,7,<,F<<,A<F<<<FKF7
 ```
+
+## How to convert back into barcoded.fq
+
+* format switch back into 10X style 
+
+```
+awk '{ if((NR)%4==1){split($1,a,"/") ;c=a[1]; split(c,b,"#"); if(b[2] == "0_0_0"){print b[1]; }else{printf("%s %s\n",b[1], b[2]);}} else { print $0 } }'  stlfr_read.1.fastq > 10X.1.fastq
+
+awk '{ if((NR)%4==1){split($1,a,"/") ;c=a[1]; split(c,b,"#"); if(b[2] == "0_0_0"){print b[1]; }else{printf("%s %s\n",b[1], b[2]);}} else { print $0 } }'  stlfr_read.2.fastq > 10X.2.fastq
+```
+
+* merge r1 and r1 into barcoded.fastq
+
+```
+./merge.pl 10X.1.fastq 10X.2.fastq | gzip -c >barcoded.fastq.gz
+```
